@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Introduction to QuickTime File Format Specification</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta charset="utf-8">
+    <meta id="book-resource-type" name="book-resource-type" content="Guide">
+    <meta scheme="apple_ref" id="identifier" name="identifier" content="//apple_ref/doc/uid/TP40000939">
+    <meta id="document-version" name="document-version" content="6.3.1">
+    <meta id="build" name="build" content="c1e4c7a89af8f899a21cfa81fc33ba42" />
+    <meta id="chapterId" name="chapterId" content="TP40000939-CH202">
+    <meta id="date" name="date" content="2016-09-13">
+    <meta id="description" name="description" content="Describes the file format and internal data structures of QuickTime movies.">
+    <meta id="book-title" name="book-title" content="QuickTime File Format Specification">
+    <meta id="book-root" name="book-root" content="../">
+    <meta id="book-json" name="book-json" content="../book.json">
+    <meta id="devcenter" name="devcenter" content="Mac Dev Center">
+    <meta id="devcenter-url" name="devcenter-url" content="http://developer.apple.com/devcenter/mac">
+    <meta id="reflib" name="reflib" content="Documentation Archive">
+    <meta id="book-assignments" name="book-assignments" content="{Type/Guide}, {Technologies/Media Layer/QuickTime}, {Topic/Data Management/File Management}">
+    
+    
+    <meta id="copyright" name="copyright" content="Copyright 2018 Apple Inc. All Rights Reserved.">
+    <meta id="xcode-display" name="xcode-display" content="render">
+    <meta id="IndexTitle" name="IndexTitle" content="QuickTime File Format Specification: Introduction to QuickTime File Format Specification">
+    <meta id="resources-uri" name="resources-uri" content="../../../../Resources/1282">
+    <link id="book-index-page" rel="Start" title="QuickTime File Format Specification" type="text/html" href="../index.html">
+    <link id="next-page" rel="Next" type="text/html" href="../QTFFChap1/qtff1.html">
+    <link id="previous-page" rel="Prev" type="text/html" href="">
+    <link rel="stylesheet" type="text/css" href="../../../../Resources/1282/CSS/screen.css">
+    
+    <!-- xcode_css -->
+    <link rel="stylesheet" type="text/css" href="../../../../Resources/1282/CSS/feedback.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta id="platforms" name="platforms" content="OS X">
+</head>    
+<body><a name="//apple_ref/doc/uid/TP40000939-CH202" title="Introduction to QuickTime File Format Specification"></a>
+    <div id="_omniture_top">
+    <!-- SiteCatalyst code version: H.8. Copyright 1997-2006 Omniture, Inc. -->
+    <script type="text/javascript">
+    /* RSID: */
+    var s_account="appleglobal,appleusdeveloper,dappdeveloperlib"
+    </script>
+
+    <script type="text/javascript" src="https://www.apple.com/metrics/scripts/s_code_h.js"></script>
+    <script type="text/javascript">
+    s.pageName=AC.Tracking.pageName();
+    s.channel="www.us.developer"
+
+    /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+    var s_code=s.t();if(s_code)document.write(s_code)</script>
+    <!-- End SiteCatalyst code version: H.8. -->
+    </div>
+
+    <div id="adcHeader" class="hideOnPrint hideInXcode">
+        <div id='ssi_Header' class="hideInXcode unified">
+            <a id="ssi_LibraryTitle" href='../../../../navigation/'>Documentation Archive</a>
+            <a id="ssi_AppleDeveloperConnection" href='https://developer.apple.com/'>Developer</a>
+            <div id='ssi_SearchButton' role="button" title="Search">Search</div>
+        </div>
+        <form id='ssi_SearchMenu' method='get' action='../../../../search/' accept-charset='utf-8'>
+            <label for='adcsearch'>Search Documentation Archive</label>
+            
+            
+    
+            <input type='search' id='ssi_SearchField' name='q' accesskey='s' results='5' />
+        </form>
+    </div>
+
+    <header id="header">
+        <div id="title" role="banner">
+            <h1>QuickTime File Format Specification</h1>
+            <span id="file_links">
+                <a id="PDF_link" role="button" tabindex='4' rel="alternate" title="Download PDF"><span id="pdf_icon"></span>PDF</a>
+                <a id="Companion_link" role="button" tabindex='3' title="Download Companion File"><span id="companion_icon"></span>Companion File</a>
+            </span>
+        </div>
+        <ul id="headerButtons" class="hideOnPrint" role="toolbar">
+            <li id="toc_button" style="display:none">
+                <button tabindex="5" id="table_of_contents" class="open" role="checkbox" aria-label="Show Table of Contents"><span class="disclosure"></span>Table of Contents</button>
+            </li>
+            <li id="jumpto_button" style="display:none" role="navigation"><select tabindex="6" id="jumpTo"><option value="top">Jump To&#133;</option></select></li>
+            <li id="downloadSample_button" style="display:none">
+                <a id="Sample_link"><button id="Sample_button">Download Sample Code</button></a>
+            </li>
+        </ul>
+    </header>
+    <nav id="tocContainer" tabindex="7">
+        <ul id="toc" role="tree"></ul>
+    </nav>
+
+    <article id="contents" tabindex="0" role="main">
+        <div id="pageNavigationLinks_top" class="pageNavigationLinks">
+            <a class='nextLink' rel='next' href='../QTFFChap1/qtff1.html'>Next</a>
+        </div>
+        <a id="top" name="top"></a>
+        <a id="INDEX" href="../index.html" style="display:none;"></a>
+        
+        <a name="//apple_ref/doc/uid/TP40000939" title="Introduction to QuickTime File Format Specification"></a><a name="//apple_ref/doc/uid/TP40000939-CH202-TPXREF101" title="Introduction to QuickTime File Format Specification"></a><h1 id="pageTitle">Introduction to QuickTime File Format Specification</h1><a name="//apple_ref/doc/uid/TP40000939-CH202-DontLinkElementID_1"></a><p>The QuickTime File Format (QTFF) is designed to accommodate the many kinds of data that need to be stored in order to work with digital multimedia. The QTFF is an ideal format for the exchange of digital media between devices, applications, and operating systems, because it can be used to describe almost any media structure.</p><p>The file format is object-oriented, consisting of a flexible collection of objects that is easily parsed and easily expanded. Unknown objects can simply be ignored or skipped, allowing considerable forward compatibility as new object types are introduced.</p>
+<p>QuickTime itself provides a number of high-level functions that you can use to create and manipulate QuickTime files, without requiring you to understand the actual file format. These functions serve to insulate developers from the low-level details of operation. That said, not all kinds of QuickTime files can be created without the information presented here.</p>
+<div class="importantbox clear"><aside><a name="//apple_ref/doc/uid/TP40000939-CH202-DontLinkElementID_29" title="Important"></a><p><strong>Important:</strong>&nbsp;
+
+The QuickTime File Format has been used as the basis of the MPEG-4 standard and the JPEG-2000 standard, developed by the International Organization for Standardization (ISO). Although these file types have similar structures and contain many functionally identical elements, they are distinct file types.</p><p></p></aside></div>
+<div class="warningbox clear"><aside><a name="//apple_ref/doc/uid/TP40000939-CH202-DontLinkElementID_30" title="Warning"></a><p><strong>Warning:</strong>&nbsp;
+Do not use this specification to interpret a file that conforms to a different specification, however similar.</p><p></p><div class="clear"></div></aside></div><a name="//apple_ref/doc/uid/TP40000939-CH202-DontLinkElementID_2"></a>
+<p>The <em>QuickTime File Format Specification</em> assumes that you are familiar with the basic concepts of digital video and audio, as well as with programming QuickTime and the QuickTime API. Note that this version of the document supersedes all previous versions of the <em>QuickTime File Format Specification</em>.</p><a name="//apple_ref/doc/uid/TP40000939-CH202-DontLinkElementID_3" title="Organization of This Document"></a><h2 class="jump">Organization of This Document</h2><p>This document begins with an overview of QuickTime atoms, then presents the structure of the QuickTime file format in detail. This is followed by a series of code examples for manipulating a QuickTime file using the QuickTime API. Finally, a number of related topics are described in a series of appendixes. These include such topics as the handling of metadata when importing files into QuickTime, random access, and the QuickTime Image File format.</p>
+<p>QuickTime files are described in general, rather than how they are supported on a specific computing platform or in a specific programming language. As a result, the file format information is presented in a tabular manner, rather than in coded data structures. Similarly, field names are presented in English rather than as programming language tags. Furthermore, to the extent possible, data types are described generically. For example, this book uses “32-bit signed integer” rather than “long” to define a 32-bit integer value.</p>
+<p>QuickTime files are used to store QuickTime movies, as well as other data. If you are writing an application that parses QuickTime files, you should recognize that there may be non-movie data in the files.</p><p>QuickTime is a rich technology that continues to evolve as new practices and needs arise in audio/visual media. Because of this, certain elements of QuickTime technology may become deprecated over time. In order to preserve sufficient information about these legacy components for existing QuickTime files that include them, deprecated elements are marked with a note at the top of their section in this revision of the <em>QuickTime File Format Specification</em>. </p><section><a name="//apple_ref/doc/uid/TP40000939-CH202-SW1" title="Licensing Information"></a><h2 class="jump">Licensing Information</h2><p>The <em>QuickTime File Format Specification</em> is provided for informational purposes. Apple may have patents, patent applications, trademarks, copyrights, or other intellectual property rights covering subject matter in this document. The furnishing of this document does not give you a license to any patents, trademarks, copyrights, or other intellectual property.</p><div class="importantbox clear"><aside><a name="//apple_ref/doc/uid/TP40000939-CH202-DontLinkElementID_31" title="Important"></a><p><strong>Important:</strong>&nbsp;For more information about licensing the QuickTime File Format, contact: Apple, Inc., Software Licensing Department, 12545 Riata Vista Circle, MS 198 3-SWL, Austin, TX 78727. Email Address: sw.license@apple.com</p><p></p></aside></div></section>
+
+<section><a name="//apple_ref/doc/uid/TP40000939-CH202-20110" title="Special Fonts"></a><h2 class="jump">Special Fonts</h2>
+<p>All code listings, reserved words, and the names of actual data structures, constants, fields, parameters, and routines are shown in  <code>code voice</code>.</p>
+<p>Words that appear in <strong>boldface</strong> are key terms or concepts and are defined in the <span class="content_text"><a href="../QTFFGloss/QTFFGloss.html#//apple_ref/doc/uid/TP40000939-CH213-TPXREF102" data-renderer-version="1">Glossary</a></span>.</p></section>
+<section><a name="//apple_ref/doc/uid/TP40000939-CH202-5256" title="For More Information"></a><h2 class="jump">For More Information</h2>
+<p>For information about membership in Apple’s developer program and developer technical support, you should go to this URL: </p><p><span class="content_text"><a href="http://developer.apple.com/" class="browserLink" >Apple Developer</a></span></p>
+<p>For information on registering signatures, file types, and other technical information, contact</p><ul class="simple"><li><p>Apple Developer Technical Support (DTS)</p><p>Apple, Inc.</p><p>1 Infinite Loop, M/S 303-2T</p><p>Cupertino, CA 95014</p></li></ul></section>
+        <div id="pageNavigationLinks_bottom" class="pageNavigationLinks">
+            <a class='nextLink' rel='next' href='../QTFFChap1/qtff1.html'>Next</a>
+        </div><br/>
+        <div class="copyright"><br/><hr /><div align="center"><p class="content_text" lang="en" dir="ltr"> Copyright &#x00a9; 2004, 2016 Apple Inc. All Rights Reserved.  <a href="http://www.apple.com/legal/internet-services/terms/site.html" target="_blank">Terms of Use</a>   |  <a href="http://www.apple.com/privacy/" target="_blank">Privacy Policy</a>  |  Updated: 2016-09-13</p></div></div>
+
+        <div id="pediaWindow">
+            <div id="pediaHeader"></div>
+            <div id="pediaBody"></div>
+        </div>
+    </article>
+
+    <div id="blackout">
+    <div id="preload"></div>
+</div>
+<div id="modal" aria-hidden="true">
+    <div id="closebox" tabindex="0" aria-label="Close feedback form" role="button"></div>
+    <div id="sending" class="hidden">
+        <h2 tabindex="0">Sending feedback&hellip;</h2>
+        <div id="sending_img"></div>
+    </div>
+    <div id="error" class="hidden">
+        <h2 tabindex="0">We&rsquo;re sorry, an error has occurred.</h2>
+        <p>Please try submitting your feedback later.</p>
+        <div id="error_icon"></div>
+    </div>
+    <div id="success" class="hidden">
+        <h2 tabindex="0">Thank you for providing feedback!</h2>
+        <p>Your input helps improve our developer documentation.</p>
+        <div id="thank_you_icon"></div>
+    </div>
+    
+    <form id="feedback" action="#" method="post">
+        <div class="left-leaf">
+            <h2 id="helpful_title" data-asterisk="a1" tabindex="0">How helpful is this document?</h2>     
+            <sup id="a1" class="asterisk" aria-hidden="true">*</sup>
+
+            <div id="star_group" role="radiogroup" aria-required="true">
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="1" /> 
+                    Very helpful
+                </label>
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="2" /> 
+                    Somewhat helpful
+                </label>
+                <label>
+                    <input class="radio" type="radio" name="helped" value="3" /> 
+                    Not helpful
+                </label>
+            </div>
+        </div>
+        <div class="right-leaf">
+            <h2>How can we improve this document?</h2>
+            <div id="improve" class="checkboxes">
+                <label>
+                    <input type="checkbox" name="typo" /> 
+                    Fix typos or links
+                </label>
+                <label>
+                    <input type="checkbox" name="infoIncorrect" /> 
+                    Fix incorrect information
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_examples" /> 
+                    Add or update code samples
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_art" /> 
+                    Add or update illustrations
+                </label>
+                <label>
+                    <input type="checkbox" name="missingInfo" /> 
+                    Add information about...
+                </label>
+            </div>
+        </div>
+
+        <textarea id="comment" name="problem" cols="70" rows="8" placeholder="Please tell us more about your experience with this document" data-asterisk="a2" required></textarea>
+        <sup id="a2" class="asterisk" aria-hidden="true">*</sup>
+
+        <p class="fineprint">
+            <em aria-hidden="true"><span>*</span> Required information</em>
+        </p> 
+
+        <input id="submit" type="button" value="Send" />
+
+        <section id="legal">
+            <p>
+                To submit a product bug or enhancement request, please visit the 
+                <a href="https://developer.apple.com/bugreporter/" target="_blank">Bug Reporter</a> 
+                page.
+            </p>
+            <p>
+                Please read <a href="http://www.apple.com/legal/policies/ideas.html" target="_blank">Apple's Unsolicited Idea Submission Policy</a> 
+                before you send us your feedback.
+            </p> 
+        </section>
+    </form>
+</div>
+
+    
+    <script charset="utf-8" src="../../../../Resources/1282/JavaScript/lib/prototype.js"></script>
+    <script src="../../../../Resources/1282/JavaScript/library.js"></script>
+</body>
+</html>
